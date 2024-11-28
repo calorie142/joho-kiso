@@ -37,7 +37,7 @@ if button:
     right_column.write('ここは右カラムです')
 
 from PIL import Image #PILをpip install pillowを実施する
-img = Image.open("増田 來亜 _ Masuda Kureaのストーリーズが消える前にInstagramで見よう。 - Google Chrome 2024_11_21 18_30_53.png")
+img = Image.open("kurea.png")
     #自分の画像のファイル名にする(room.jpgは例えば)
     #自分のPCの画像を同じフォルダに入れて指定する
 st.image(img, caption='増田來亜', use_container_width=True)
