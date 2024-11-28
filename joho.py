@@ -24,9 +24,6 @@ text = st.text_input("あなたの名前を教えてください")
 if text != "":
     st.write("あなたの名前は" +text+ "です")
 
-condition = st.slider("あなたの今日の調子は？",0,10,5)
-st.write("コンディション" ,condition)
-
 option = st.selectbox("好きな数字を教えてください" ,list(["1番","2番","3番","4番"]))
 st.write("あなたが選択したのは",option,"です")
 
@@ -38,6 +35,4 @@ if button:
 
 from PIL import Image #PILをpip install pillowを実施する
 img = Image.open("kurea.png")
-    #自分の画像のファイル名にする(room.jpgは例えば)
-    #自分のPCの画像を同じフォルダに入れて指定する
 st.image(img, caption='増田來亜', use_container_width=True)
