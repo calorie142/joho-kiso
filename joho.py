@@ -41,9 +41,3 @@ img = Image.open("増田 來亜 _ Masuda Kureaのストーリーズが消える�
     #自分の画像のファイル名にする(room.jpgは例えば)
     #自分のPCの画像を同じフォルダに入れて指定する
 st.image(img, caption='増田來亜', use_container_width=True)
-
-df = pd.DataFrame(np.random.rand(100,2)/[50,50] + [36.64,138.19],columns = ['lat','lon',])
-    #lat lon 緯度と経度
-    #緯度と経度から地図に書き込む
-st.map(df)
-st.table(df)
