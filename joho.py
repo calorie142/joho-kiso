@@ -4,6 +4,7 @@ import math
 from PIL import Image
 import pandas as pd
 import datetime
+import pytz
 
 st.title("自分専用もの技ツール集")
 
@@ -15,7 +16,8 @@ with tab0:
     api_key = "07e67ab7542092483c720629da6e0542"
     col4, col5 = st.columns(2)
     with col4:
-        df_now = datetime.datetime.now()
+        japan_tz = pytz.timezone("Asia/Tokyo")
+        df_now = datetime.datetime.now(japan_tz)
         st.subheader(f"{df_now.year}年 {df_now.month}月 {df_now.day}日")
         st.subheader(f"{(df_now.hour)+9}時 {df_now.minute}分")
         st.subheader(f"令和{(df_now.year)-2018}年")
