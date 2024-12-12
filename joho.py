@@ -38,7 +38,7 @@ with tab0:
                 df_we.at[city_name[cities.index(city)],"気温"] = data['main']['temp']
         st.write(df_we)
     if st.button("更新"):
-        None
+        st.text(None)
 
 with tab1:
     st.header("文字数チェッカー")
