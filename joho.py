@@ -142,20 +142,7 @@ with tab5:
             st.text("横:"+str(width)+",縦:"+str(height))
         except:
             st.text("エラーが発生しました")
-    photo_sizeW = st.slider("横の変換後のサイズ",100,1200,600)
-    photo_sizeH = st.slider("縦の変換後のサイズ",100,1200,600)
     format = st.radio("ファイル形式",("jpg","png"),horizontal=True)
-    if st.button("指定のサイズで変換"):
-        try:
-            photoa = photob.resize((photo_sizeW,photo_sizeH))
-            if format == "jpg":
-                photoa = photoa.convert("RGB")
-            else:
-                photoa = photoa.convert("RGBA")
-            st.image(photoa,caption=" 変換完了",use_container_width=True)
-            
-        except:
-            st.text("エラーが発生しました")
     if st.button("600以下で変換"):
         try:
             if width >= height :
@@ -169,3 +156,17 @@ with tab5:
             st.image(photoa,caption="変換完了",use_container_width=True)
         except:
             st.text("エラーが発生しました")
+    photo_sizeW = st.slider("横の変換後のサイズ",100,1200,600)
+    photo_sizeH = st.slider("縦の変換後のサイズ",100,1200,600)
+    if st.button("指定のサイズで変換"):
+        try:
+            photoa = photob.resize((photo_sizeW,photo_sizeH))
+            if format == "jpg":
+                photoa = photoa.convert("RGB")
+            else:
+                photoa = photoa.convert("RGBA")
+            st.image(photoa,caption=" 変換完了",use_container_width=True)
+            
+        except:
+            st.text("エラーが発生しました")
+    
