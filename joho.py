@@ -16,9 +16,9 @@ with tab0:
     col4, col5 = st.columns([2,1])
     with col4:
         df_now = datetime.datetime.now()
-        st.subheader(str(df_now.year)+"年",str(df_now.month)+"月",str(df_now.day)+"日")
-        st.subheader(str(df_now.hour)+"時",str(df_now.minute)+"分")
-        st.subheader("令和"+str((df_now.year)-2018)+"年")
+        st.subheader(str(str(df_now.year)+"年",str(df_now.month)+"月",str(df_now.day)+"日"))
+        st.subheader(str(str(df_now.hour)+"時",str(df_now.minute)+"分"))
+        st.subheader(str("令和"+str((df_now.year)-2018)+"年"))
     with col5:
         cities = ["Nagano","Matsumoto","Ueda","Ina"]
         city_name = ["長野","松本","上田","伊那"]
