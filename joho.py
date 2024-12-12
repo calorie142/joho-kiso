@@ -148,24 +148,24 @@ with tab5:
     if st.button("指定のサイズで変換"):
         try:
             photoa = photob.resize((photo_sizeW,photo_sizeH))
-            st.image(photoa,caption="保存しました ※これはイメージです",use_container_width=True)
             if format == "jpg":
-                photoa.save(file_name+".jpg",format="JPEG")
+                phtoa = photoa.convert("RGB")
             else:
-                photoa.save(file_name+".png",format="PNG")
+                phtoa = photoa.convert("RGBA")
+            st.image(photoa,caption=" 変換完了",use_container_width=True)
+            
         except:
             st.text("エラーが発生しました")
     if st.button("600以下で変換"):
         try:
             if width >= height :
                 photoa = photob.resize((600,int(height*(600/width))))
-                st.image(photoa,caption="保存しました ※これはイメージです",use_container_width=True)
             else:
                 photoa = photob.resize((int(width*(600/height)),600))
-                st.image(photoa,caption="変換完了",use_container_width=True)
             if format == "jpg":
-                photoa.save(file_name+".jpg",format="JPEG")
+                photoa = photoa.convert("RGB")
             else:
-                photoa.save(file_name+".png",format="PNG")
+                phtoa = photoa.convert("RGBA")
+            st.image(photoa,caption="変換完了",use_container_width=True)
         except:
             st.text("エラーが発生しました")
