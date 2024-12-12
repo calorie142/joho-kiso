@@ -3,6 +3,7 @@ import requests
 import math
 from PIL import Image
 import pandas as pd
+import datetime
 
 st.title("自分専用もの技ツール集")
 
@@ -12,22 +13,27 @@ with tab0:
     st.header("概要")
     st.text("このサイトでは大学生活でたまに使う細かいツールを集めてみました。これ一つで様々なことができます。2年弱、もの技で過ごしてきて使ったツールをまとめてみたのでぜひ活用してください。")
     api_key = "07e67ab7542092483c720629da6e0542"
-    cities = ["Nagano","Matsumoto","Ueda","Ina"]
-    city_name = ["長野","松本","上田","伊那"]
-    df_we = pd.DataFrame({"天気":[None,None,None,None],"気温":[None,None,None,None],})
-    df_we.index = city_name
-    def get_weather(city, api_key):
-        url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
-        response = requests.get(url)
-        data = response.json()
-        return data
-    for city in cities:
-        data = get_weather(city, api_key)
-        if data.get("weather"):
-            df_we.at[city_name[cities.index(city)],"天気"] = data['weather'][0]['description']
-            df_we.at[city_name[cities.index(city)],"気温"] = data['main']['temp']
-    st.write(df_we)
-    
+    col4, col5 = st.columns([3,1])
+    with col4:
+        df_now = datetime.datetime.now()
+        st.subheader(df_now.strftime("%Y年%m月%d日 %H:%M:%S"))
+    with col5:
+        cities = ["Nagano","Matsumoto","Ueda","Ina"]
+        city_name = ["長野","松本","上田","伊那"]
+        df_we = pd.DataFrame({"天気":[None,None,None,None],"気温":[None,None,None,None],})
+        df_we.index = city_name
+        def get_weather(city, api_key):
+            url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+            response = requests.get(url)
+            data = response.json()
+            return data
+        for city in cities:
+            data = get_weather(city, api_key)
+            if data.get("weather"):
+                df_we.at[city_name[cities.index(city)],"天気"] = data['weather'][0]['description']
+                df_we.at[city_name[cities.index(city)],"気温"] = data['main']['temp']
+        st.write(df_we)
+
 with tab1:
     st.header("文字数チェッカー")
     st.text("文字数を数えます。")
