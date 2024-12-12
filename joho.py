@@ -13,6 +13,7 @@ tab0, tab1, tab2, tab3, tab4, tab5= st.tabs(["概要","文字数","置換","連�
 with tab0:
     st.header("概要")
     st.text("このサイトでは大学生活でたまに使う細かいツールを集めてみました。これ一つで様々なことができます。2年弱、もの技で過ごしてきて使ったツールをまとめてみたのでぜひ活用してください。")
+    st.divider()
     api_key = "07e67ab7542092483c720629da6e0542"
     col4, col5 = st.columns(2)
     with col4:
@@ -43,6 +44,7 @@ with tab0:
 with tab1:
     st.header("文字数チェッカー")
     st.text("文字数を数えます。")
+    st.divider()
     text_1 = st.text_input("ここにテキストを入れてください",key="text_1")
     df = pd.read_csv("Book1.csv")
     if text_1:
@@ -54,6 +56,7 @@ with tab1:
 with tab2:
     st.header("置換")
     st.text("文章内の文字を置き換えます。")
+    st.divider()
     text_3 = st.text_input("元の文章を入れてください",key="text_3")
     repB = st.text_input("置換前",key="repB")
     if repB:
@@ -78,16 +81,15 @@ with tab2:
 
 with tab3:
     st.header("連絡先")
-    st.text("セキュリティの観点でこの項目は削除しました")
+    st.text("この項目は削除しました")
     
 
 with tab4:
     st.title("三角関数")
     st.text("授業で使う三角関数がすぐに扱えるようにまとめました。度数法で入力してください。記号には対応していません。")
+    st.divider()
     st.text("※√3/2→0.86603　1/√2→0.70711")
-
     col1, col2, col3 =st.columns([1,1,1])
-
     with col1:
         st.subheader("sin")
         text_5 = st.text_input("sinの値を求めます",key="text_5")
@@ -133,6 +135,7 @@ with tab4:
 with tab5:
     st.title("画像サイズ")
     st.text("画像サイズを変換します。")
+    st.divider()
     fileb = st.file_uploader("画像ファイルを選択してください",type=["png","jpg","webp"])
     if fileb is not None:
         try:
@@ -156,6 +159,7 @@ with tab5:
             st.image(photoa,caption="変換完了",use_container_width=True)
         except:
             st.text("エラーが発生しました")
+    st.divider()
     photo_sizeW = st.slider("横の変換後のサイズ",100,1200,600)
     photo_sizeH = st.slider("縦の変換後のサイズ",100,1200,600)
     if st.button("指定のサイズで変換"):
