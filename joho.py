@@ -19,7 +19,7 @@ with tab0:
         japan_tz = pytz.timezone("Asia/Tokyo")
         df_now = datetime.datetime.now(japan_tz)
         st.subheader(f"{df_now.year}年 {df_now.month}月 {df_now.day}日")
-        st.subheader(f"{(df_now.hour)+9}時 {df_now.minute}分")
+        st.subheader(f"{df_now.hour}時 {df_now.minute}分")
         st.subheader(f"令和{(df_now.year)-2018}年")
     with col5:
         cities = ["Nagano","Matsumoto","Ueda","Ina"]
