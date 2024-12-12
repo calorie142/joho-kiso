@@ -13,10 +13,12 @@ with tab0:
     st.header("概要")
     st.text("このサイトでは大学生活でたまに使う細かいツールを集めてみました。これ一つで様々なことができます。2年弱、もの技で過ごしてきて使ったツールをまとめてみたのでぜひ活用してください。")
     api_key = "07e67ab7542092483c720629da6e0542"
-    col4, col5 = st.columns([3,1])
+    col4, col5 = st.columns([2,1])
     with col4:
         df_now = datetime.datetime.now()
-        st.subheader(df_now.strftime("%Y年%m月%d日 %H:%M:%S"))
+        st.subheader(str(df_now.year)+"年",str(df_now.month)+"月",str(df_now.day)+"日")
+        st.subheader(str(df_now.hour)+"時",str(df_now.minute)+"分")
+        st.subheader("令和"+str((df_now.year)-2018)+"年")
     with col5:
         cities = ["Nagano","Matsumoto","Ueda","Ina"]
         city_name = ["長野","松本","上田","伊那"]
@@ -33,6 +35,8 @@ with tab0:
                 df_we.at[city_name[cities.index(city)],"天気"] = data['weather'][0]['description']
                 df_we.at[city_name[cities.index(city)],"気温"] = data['main']['temp']
         st.write(df_we)
+    if st.button("更新"):
+        None
 
 with tab1:
     st.header("文字数チェッカー")
