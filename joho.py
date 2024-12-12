@@ -149,9 +149,9 @@ with tab5:
         try:
             photoa = photob.resize((photo_sizeW,photo_sizeH))
             if format == "jpg":
-                phtoa = photoa.convert("RGB")
+                photoa = photoa.convert("RGB")
             else:
-                phtoa = photoa.convert("RGBA")
+                photoa = photoa.convert("RGBA")
             st.image(photoa,caption=" 変換完了",use_container_width=True)
             
         except:
@@ -165,7 +165,7 @@ with tab5:
             if format == "jpg":
                 photoa = photoa.convert("RGB")
             else:
-                phtoa = photoa.convert("RGBA")
+                photoa = photoa.convert("RGBA")
             st.image(photoa,caption="変換完了",use_container_width=True)
         except:
             st.text("エラーが発生しました")
