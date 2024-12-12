@@ -14,7 +14,7 @@ with tab0:
     api_key = "07e67ab7542092483c720629da6e0542"
     cities = ["Nagano","Matsumoto","Ueda","Ina"]
     city_name = ["長野","松本","上田","伊那"]
-    df_we = pd.DataFrame({"天気":[None],"気温":[None],})
+    df_we = pd.DataFrame({"天気":[None,None,None,None],"気温":[None,None,None,None],})
     df_we.index = city_name
     def get_weather(city, api_key):
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
