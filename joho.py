@@ -4,7 +4,7 @@ import math
 from PIL import Image
 import pandas as pd
 
-st.title("自分専用ツール集")
+st.title("自分専用もの技ツール集")
 
 tab0, tab1, tab2, tab3, tab4, tab5= st.tabs(["概要","文字数","置換","連絡先","三角関数","画像変換"])
 
@@ -14,7 +14,7 @@ with tab0:
     api_key = "07e67ab7542092483c720629da6e0542"
     cities = ["Nagano","Matsumoto","Ueda","Ina"]
     city_name = ["長野","松本","上田","伊那"]
-    df_we = pd.DataFrame({"天気":[1,2,3,4],"気温":[1,2,3,4],})
+    df_we = pd.DataFrame({"天気":[],"気温":[],})
     df_we.index = city_name
     def get_weather(city, api_key):
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
