@@ -17,27 +17,33 @@ with tab0:
     api_key = "07e67ab7542092483c720629da6e0542"
     col4, col5 = st.columns(2)
     with col4:
-        japan_tz = pytz.timezone("Asia/Tokyo")
-        df_now = datetime.datetime.now(japan_tz)
-        st.subheader(f"{df_now.year}年 {df_now.month}月 {df_now.day}日")
-        st.subheader(f"{df_now.hour}時 {df_now.minute}分")
-        st.subheader(f"令和{(df_now.year)-2018}年")
+        try:
+            japan_tz = pytz.timezone("Asia/Tokyo")
+            df_now = datetime.datetime.now(japan_tz)
+            st.subheader(f"{df_now.year}年 {df_now.month}月 {df_now.day}日")
+            st.subheader(f"{df_now.hour}時 {df_now.minute}分")
+            st.subheader(f"令和{(df_now.year)-2018}年")
+        except:
+            st.text("エラーが発生しました")
     with col5:
-        cities = ["Nagano","Matsumoto","Ueda","Ina"]
-        city_name = ["長野","松本","上田","伊那"]
-        df_we = pd.DataFrame({"天気":[None,None,None,None],"気温":[None,None,None,None],})
-        df_we.index = city_name
-        def get_weather(city, api_key):
-            url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
-            response = requests.get(url)
-            data = response.json()
-            return data
-        for city in cities:
-            data = get_weather(city, api_key)
-            if data.get("weather"):
-                df_we.at[city_name[cities.index(city)],"天気"] = data['weather'][0]['description']
-                df_we.at[city_name[cities.index(city)],"気温"] = data['main']['temp']
-        st.write(df_we)
+        try:
+            cities = ["Nagano","Matsumoto","Ueda","Ina"]
+            city_name = ["長野","松本","上田","伊那"]
+            df_we = pd.DataFrame({"天気":[None,None,None,None],"気温":[None,None,None,None],})
+            df_we.index = city_name
+            def get_weather(city, api_key):
+                url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+                response = requests.get(url)
+                data = response.json()
+                return data
+            for city in cities:
+                data = get_weather(city, api_key)
+                if data.get("weather"):
+                    df_we.at[city_name[cities.index(city)],"天気"] = data['weather'][0]['description']
+                    df_we.at[city_name[cities.index(city)],"気温"] = data['main']['temp']
+            st.write(df_we)
+        except:
+            st.text("エラーが発生しました")
     if st.button("更新"):
         st.text("")
 
@@ -59,8 +65,6 @@ with tab2:
     st.divider()
     text_3 = st.text_input("元の文章を入れてください",key="text_3")
     repB = st.text_input("置換前",key="repB")
-    if repB:
-        st.text(str(len(text_1))+"箇所")
     repA = st.text_input("置換後",key="repA")
     if text_3:
         if st.button("、。を,.に置換"):
@@ -88,7 +92,7 @@ with tab4:
     st.title("三角関数")
     st.text("授業で使う三角関数がすぐに扱えるようにまとめました。度数法で入力してください。記号には対応していません。")
     st.divider()
-    st.text("※√3/2→0.86603　1/√2→0.70711")
+    st.text("※√3/2→0.86603 1/√2→0.70711")
     col1, col2, col3 =st.columns([1,1,1])
     with col1:
         st.subheader("sin")
