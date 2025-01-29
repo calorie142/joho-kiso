@@ -6,9 +6,9 @@ import pandas as pd
 import datetime
 import pytz
 
-st.title("自分専用もの技ツール集")
+st.title("もの技ツール集 Ver.2")
 
-tab0, tab1, tab2, tab3, tab4, tab5= st.tabs(["概要","文字数","置換","連絡先","三角関数","画像変換"])
+tab0, tab1, tab2, tab3, tab4, tab5, tab6= st.tabs(["概要","文字数","置換","連絡先","三角関数","画像変換","単語帳"])
 
 with tab0:
     st.header("概要")
@@ -45,7 +45,7 @@ with tab0:
         except:
             st.text("エラーが発生しました")
     if st.button("更新"):
-        st.text("")
+        pass
 
 with tab1:
     st.header("文字数チェッカー")
@@ -78,7 +78,7 @@ with tab2:
             text_4 = text_4.replace(".","。")
             text_4 = text_4.replace("．","。")
             st.text(text_4)
-    if text_3 and repB and repA:
+    if text_3 and repB:
         if st.button("置換"):
             text_4 = text_3.replace(repB,repA)
             st.text(text_4)
@@ -86,6 +86,7 @@ with tab2:
 with tab3:
     st.header("連絡先")
     st.text("この項目は削除しました")
+    
     
 
 with tab4:
@@ -173,8 +174,79 @@ with tab5:
                 photoa = photoa.convert("RGB")
             else:
                 photoa = photoa.convert("RGBA")
-            st.image(photoa,caption=" 変換完了",use_container_width=True)
-            
+            st.image(photoa,caption=" 変換完了",use_container_width=True)    
         except:
             st.text("エラーが発生しました")
-    
+
+with tab6:
+    st.title("単語帳")
+    st.text("単語とその意味、理解しているかどうかを記録します。")
+    st.divider()
+    word_data = pd.read_csv("C:/Users/Ruka/streamlit/word.csv")
+    st.table(word_data)
+    if st.button("更新",key="word"):
+        pass
+    tab10, tab11, tab12 = st.tabs(["追加","編集","削除"])
+    with tab10:
+        new_word = st.text_input("新しく登録する単語",key="new_word")
+        new_meaning = st.text_input("新しく登録する単語の意味",key="new_meaning")
+        new_remembered = st.checkbox("理解した",key="new_remembered")
+        if new_word and new_meaning:
+            if st.button("単語を追加"):
+                if new_remembered == False:
+                    new_remembered = "×"
+                elif new_remembered == True:
+                    new_remembered = "〇"
+                else:
+                    new_remembered = "-"
+                try:
+                    new_data = pd.DataFrame({"単語": [new_word],"意味": [new_meaning],"理解": [new_remembered]})
+                    word_data = pd.concat([word_data, new_data], ignore_index=True)
+                    word_data.to_csv("C:/Users/Ruka/streamlit/word.csv",index=False)
+                    st.success("単語の追加に成功しました！")
+                except:
+                    st.error("単語の追加に失敗しました")
+    with tab11:
+        edit_remembered = None
+        edit_words = st.selectbox("編集する単語を選択", word_data["単語"],key="edit_words")
+        edit_num = word_data.index[word_data["単語"] == edit_words].tolist()[0]
+        st.table(word_data.loc[edit_num].to_frame().T)
+        edi_wo = st.checkbox("単語を編集")
+        if edi_wo:
+            edit_word = st.text_input("編集する単語")
+        st.divider()
+        edi_me = st.checkbox("意味を編集")
+        if edi_me:
+            edit_meaning = st.text_input("編集する意味")
+        st.divider()
+        edi_re = st.checkbox("理解を編集")
+        if edi_re:
+            edit_remembered = st.radio("",options=["理解した","理解していない"])
+        if edi_wo or edi_me or edi_re:
+            if st.button("単語を修正"):
+                if edit_remembered == "理解していない":
+                    edit_remembered = "×"
+                elif edit_remembered == "理解した":
+                    edit_remembered = "〇"
+                else:
+                    edit_remembered = "-"
+                try:
+                    if edi_wo:
+                        word_data.at[edit_num, "単語"] = edit_word
+                    if edi_me:
+                        word_data.at[edit_num, "意味"] = edit_meaning
+                    if edi_re:
+                        word_data.at[edit_num, "理解"] = edit_remembered
+                    word_data.to_csv("C:/Users/Ruka/streamlit/word.csv",index=False)
+                    st.success("修正に成功しました！")
+                except:
+                    st.error("修正に失敗しました")
+    with tab12:
+        delete_words = st.selectbox("削除する単語を選択", word_data["単語"], key="delete_words")
+        if st.button("単語を削除", key="delete_button"):
+            try:
+                word_data = word_data[word_data["単語"] != delete_words]
+                word_data.to_csv("C:/Users/Ruka/streamlit/word.csv", index=False)
+                st.success("削除に成功しました！")
+            except Exception as e:
+                st.error("削除に失敗しました")
