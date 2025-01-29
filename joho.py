@@ -182,7 +182,7 @@ with tab6:
     st.title("単語帳")
     st.text("単語とその意味、理解しているかどうかを記録します。")
     st.divider()
-    word_data = pd.read_csv("C:/Users/Ruka/streamlit/GitHub/word.csv")
+    word_data = pd.read_csv("word.csv")
     st.table(word_data)
     if st.button("更新",key="word"):
         pass
@@ -202,7 +202,7 @@ with tab6:
                 try:
                     new_data = pd.DataFrame({"単語": [new_word],"意味": [new_meaning],"理解": [new_remembered]})
                     word_data = pd.concat([word_data, new_data], ignore_index=True)
-                    word_data.to_csv("C:/Users/Ruka/streamlit/GitHub/word.csv",index=False)
+                    word_data.to_csv("word.csv",index=False)
                     st.success("単語の追加に成功しました！")
                 except:
                     st.error("単語の追加に失敗しました")
@@ -237,7 +237,7 @@ with tab6:
                         word_data.at[edit_num, "意味"] = edit_meaning
                     if edi_re:
                         word_data.at[edit_num, "理解"] = edit_remembered
-                    word_data.to_csv("C:/Users/Ruka/streamlit/GitHub/word.csv",index=False)
+                    word_data.to_csv("word.csv",index=False)
                     st.success("修正に成功しました！")
                 except:
                     st.error("修正に失敗しました")
@@ -246,7 +246,7 @@ with tab6:
         if st.button("単語を削除", key="delete_button"):
             try:
                 word_data = word_data[word_data["単語"] != delete_words]
-                word_data.to_csv("C:/Users/Ruka/streamlit/GitHub/word.csv", index=False)
+                word_data.to_csv("word.csv", index=False)
                 st.success("削除に成功しました！")
             except Exception as e:
                 st.error("削除に失敗しました")
