@@ -182,7 +182,7 @@ with tab6:
     st.title("単語帳")
     st.text("単語とその意味、理解しているかどうかを記録します。")
     st.divider()
-    word_data = pd.read_csv("C:/Users/Ruka/streamlit/word.csv")
+    word_data = pd.read_csv("C:/Users/Ruka/streamlit/GitHub/word.csv")
     st.table(word_data)
     if st.button("更新",key="word"):
         pass
