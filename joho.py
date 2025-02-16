@@ -10,8 +10,9 @@ def read_csv_with_encoding(file_path):
     encoding = result['encoding']
     return pd.read_csv(file_path, encoding=encoding)
 
-# 日本語フォントの設定（Noto Sans JP）
-font_path = 'NotoSansJP-Regular.otf'  # アップロードしたNoto Sans JPフォントファイルのパス
+# Noto Sans JPフォントのインポートと設定
+font_url = "https://fonts.google.com/download?family=Noto%20Sans%20JP"
+font_path = "NotoSansJP-Regular.otf"  # ダウンロードしてローカルに保存
 try:
     font_prop = font_manager.FontProperties(fname=font_path)
     plt.rcParams['font.family'] = font_prop.get_name()
