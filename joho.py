@@ -1,8 +1,8 @@
+import matplotlib.pyplot as plt
+from matplotlib import font_manager
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import chardet
-from matplotlib import font_manager
 
 def read_csv_with_encoding(file_path):
     with open(file_path, 'rb') as f:
@@ -12,9 +12,12 @@ def read_csv_with_encoding(file_path):
 
 # 日本語フォントの設定（Noto Sans CJK JP）
 font_path = 'NotoSansCJK-Regular.ttc'  # アップロードしたフォントファイルのパス
-font_prop = font_manager.FontProperties(fname=font_path)
-plt.rcParams['font.family'] = font_prop.get_name()
-plt.rcParams['font.sans-serif'] = [font_prop.get_name()]
+try:
+    font_prop = font_manager.FontProperties(fname=font_path)
+    plt.rcParams['font.family'] = font_prop.get_name()
+    plt.rcParams['font.sans-serif'] = [font_prop.get_name()]
+except Exception as e:
+    st.error(f"フォントファイルの読み込みに失敗しました: {e}")
 
 # CSVファイルから既存のデータを読み込みます
 try:
