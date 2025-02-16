@@ -13,7 +13,12 @@ def read_csv_with_encoding(file_path):
 # 日本語フォントの設定（Noto Sans CJK JP）
 font_path = 'NotoSansCJK-Regular.ttc'  # アップロードしたフォントファイルのパス
 font_prop = font_manager.FontProperties(fname=font_path)
-plt.rcParams['font.family'] = font_prop.get_name()
+plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['font.sans-serif'] = [font_prop.get_name()]
+
+# フォントキャッシュの再構築
+import matplotlib
+matplotlib.font_manager._rebuild()
 
 # CSVファイルから既存のデータを読み込みます
 try:
@@ -86,8 +91,8 @@ with tab71:
     ax.grid(True)
     ax.legend()
 
-    st.pyplot(fig)    
-
+    st.pyplot(fig)
+    
 with tab72:
     genre = st.radio("ジャンル", ["渋滞", "抜け道", "通行止め", "通りにくい", "事故", "災害"])
     x_coord = st.number_input("X座標 (-100 - 100)", min_value=-100, max_value=100, step=1)
