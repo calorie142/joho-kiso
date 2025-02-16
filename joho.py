@@ -10,19 +10,19 @@ def read_csv_with_encoding(file_path):
     encoding = result['encoding']
     return pd.read_csv(file_path, encoding=encoding)
 
-# 日本語フォントの設定（MS Gothic）
-font_path = 'C:/Windows/Fonts/msgothic.ttc'  # MS Gothicフォントのパス
+# 日本語フォントの設定（Noto Sans CJK JP）
+font_path = '/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc'  # Noto Sans CJK JPフォントのパス
 font_prop = font_manager.FontProperties(fname=font_path)
 plt.rcParams['font.family'] = font_prop.get_name()
 
 # CSVファイルから既存のデータを読み込みます
 try:
-    data = read_csv_with_encoding("C:/Users/Ruka/streamlit/coordinates.csv")
+    data = read_csv_with_encoding("coordinates.csv")
 except FileNotFoundError:
     data = pd.DataFrame(columns=["X", "Y", "内容", "ジャンル", "道幅", "高さ", "凹凸", "障害物", "期間"])
 
 try:
-    word_data = read_csv_with_encoding("C:/Users/Ruka/streamlit/GitHub/joho-kiso/車種.csv")
+    word_data = read_csv_with_encoding("word_data.csv")
 except FileNotFoundError:
     word_data = pd.DataFrame(columns=["あいことば", "車種", "全長", "全幅", "全高"])
 
@@ -118,7 +118,7 @@ with tab72:
                 "期間": [roadstop2 if genre == "通行止め" and roadstop == "選択" else roadstop if genre == "通行止め" else None]
             })
             data = pd.concat([data, new_data], ignore_index=True)
-            data.to_csv("C:/Users/Ruka/streamlit/GitHub/joho-kiso/coordinates.csv", index=False, encoding='utf-8')
+            data.to_csv("coordinates.csv", index=False, encoding='utf-8')
             st.success("内容が登録されました")
         except Exception as e:
             st.error(f"エラーが発生しました: {e}")
@@ -134,7 +134,7 @@ with tab73:
                     try:
                         new_data = pd.DataFrame({"あいことば": [new_word], "車種": [""], "全長": [""], "全幅": [""], "全高": [""]})
                         word_data = pd.concat([word_data, new_data], ignore_index=True)
-                        word_data.to_csv("C:/Users/Ruka/streamlit/GitHub/joho-kiso/車種.csv", index=False, encoding='utf-8')
+                        word_data.to_csv("車種.csv", index=False, encoding='utf-8')
                     except Exception as e:
                         st.error(f"エラーが発生しました: {e}")
                 else:
@@ -171,7 +171,7 @@ with tab73:
                                     word_data.at[edit_num, "全幅"] = edit_remembered
                                 if edi_kou:
                                     word_data.at[edit_num, "全高"] = edit_zenkou
-                                word_data.to_csv("C:/Users/Ruka/streamlit/GitHub/joho-kiso/車種.csv", index=False, encoding='utf-8')
+                                word_data.to_csv("車種.csv", index=False, encoding='utf-8')
                                 st.success("修正に成功しました！")
                             except Exception as e:
                                 st.error(f"修正に失敗しました: {e}")
@@ -183,10 +183,9 @@ with tab73:
                 if delete_word in word_data["あいことば"].values:
                     try:
                         word_data = word_data[word_data["あいことば"] != delete_word]
-                        word_data.to_csv("C:/Users/Ruka/streamlit/GitHub/joho-kiso/車種.csv", index=False, encoding='utf-8')
+                        word_data.to_csv("車種.csv", index=False, encoding='utf-8')
                         st.success("削除に成功しました")
                     except Exception as e:
                         st.error(f"削除に失敗しました: {e}")
                 else:
                     st.warning("指定されたあい言葉が見つかりません")
-                    
