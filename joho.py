@@ -189,3 +189,4 @@ with tab73:
                         st.error(f"削除に失敗しました: {e}")
                 else:
                     st.warning("指定されたあい言葉が見つかりません")
+                    
