@@ -10,8 +10,8 @@ def read_csv_with_encoding(file_path):
     encoding = result['encoding']
     return pd.read_csv(file_path, encoding=encoding)
 
-# 日本語フォントの設定（DejaVu Sans）
-font_path = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'  # DejaVu Sansフォントのパス
+# 日本語フォントの設定（Noto Sans CJK JP）
+font_path = 'NotoSansCJK-Regular.ttc'  # アップロードしたフォントファイルのパス
 font_prop = font_manager.FontProperties(fname=font_path)
 plt.rcParams['font.family'] = font_prop.get_name()
 
@@ -86,7 +86,7 @@ with tab71:
     ax.grid(True)
     ax.legend()
 
-    st.pyplot(fig)
+    st.pyplot(fig)    
 
 with tab72:
     genre = st.radio("ジャンル", ["渋滞", "抜け道", "通行止め", "通りにくい", "事故", "災害"])
