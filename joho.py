@@ -1,8 +1,8 @@
-import matplotlib.pyplot as plt
-from matplotlib import font_manager
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 import chardet
+from matplotlib import font_manager
 
 def read_csv_with_encoding(file_path):
     with open(file_path, 'rb') as f:
@@ -10,12 +10,11 @@ def read_csv_with_encoding(file_path):
     encoding = result['encoding']
     return pd.read_csv(file_path, encoding=encoding)
 
-# 日本語フォントの設定（Noto Sans CJK JP）
-font_path = 'NotoSansCJK-Regular.ttc'  # アップロードしたフォントファイルのパス
+# 日本語フォントの設定（Noto Sans JP）
+font_path = 'NotoSansJP-Regular.otf'  # アップロードしたNoto Sans JPフォントファイルのパス
 try:
     font_prop = font_manager.FontProperties(fname=font_path)
     plt.rcParams['font.family'] = font_prop.get_name()
-    plt.rcParams['font.sans-serif'] = [font_prop.get_name()]
 except Exception as e:
     st.error(f"フォントファイルの読み込みに失敗しました: {e}")
 
@@ -92,6 +91,7 @@ with tab71:
 
     st.pyplot(fig)
 
+    
 with tab72:
     genre = st.radio("ジャンル", ["渋滞", "抜け道", "通行止め", "通りにくい", "事故", "災害"])
     x_coord = st.number_input("X座標 (-100 - 100)", min_value=-100, max_value=100, step=1)
