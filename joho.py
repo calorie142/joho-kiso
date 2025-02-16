@@ -29,10 +29,14 @@ try:
 except FileNotFoundError:
     word_data = pd.DataFrame(columns=["あいことば", "車種", "全長", "全幅", "全高"])
 
-tab71, tab72, tab73 = st.tabs(["マップ", "共有", "車体情報"])
+st.title("統括マップ(仮)")
+st.text("プロトタイプです。多くの機能が未実装です。あいことばはアカウントの認証機能の代替です。「共有」にて投稿すると、「マップ」に反映されます")
+
+tab71, tab72, tab73 = st.tabs(["マップ", "共有", "車両情報"])
 
 with tab71:
-    st.subheader("仮想マップ")
+    st.subheader("マップ(仮)")
+    st.text("今回はグラフを地図に見立てています")
 
     if st.button("更新"):
         pass
@@ -94,6 +98,9 @@ with tab71:
 
     
 with tab72:
+    st.subheader("共有")
+    st.text("マップには「内容」のみ反映されます。また日本語は対応していません。")
+    
     genre = st.radio("ジャンル", ["渋滞", "抜け道", "通行止め", "通りにくい", "事故", "災害"])
     x_coord = st.number_input("X座標 (-100 - 100)", min_value=-100, max_value=100, step=1)
     y_coord = st.number_input("Y座標 (-100 - 100)", min_value=-100, max_value=100, step=1)
@@ -136,6 +143,9 @@ with tab72:
 
 
 with tab73:
+    st.subheader("車両情報")
+    st.text("あいことばはアカウントの認証機能の代替です。あいことば「ものづくり」には野村の車両の情報が乗っています。")
+    
     tab11, tab12 = st.tabs(["編集", "削除"])
 
     with tab11:
