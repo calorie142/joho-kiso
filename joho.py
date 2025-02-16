@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import japanize_matplotlib  # 日本語フォント設定用
 import chardet
 from matplotlib import font_manager
 
@@ -10,15 +11,6 @@ def read_csv_with_encoding(file_path):
     encoding = result['encoding']
     return pd.read_csv(file_path, encoding=encoding)
 
-# アップロードしたNoto Sans JPフォントファイルのパス
-font_path = 'NotoSansJP-Regular.otf'  
-try:
-    font_prop = font_manager.FontProperties(fname=font_path)
-    plt.rcParams['font.family'] = font_prop.get_name()
-    plt.rcParams['font.sans-serif'] = [font_prop.get_name()]
-except Exception as e:
-    st.error(f"フォントファイルの読み込みに失敗しました: {e}")
-
 # CSVファイルから既存のデータを読み込みます
 try:
     data = read_csv_with_encoding("coordinates.csv")
@@ -26,7 +18,7 @@ except FileNotFoundError:
     data = pd.DataFrame(columns=["X", "Y", "内容", "ジャンル", "道幅", "高さ", "凹凸", "障害物", "期間"])
 
 try:
-    word_data = read_csv_with_encoding("word_data.csv")
+    word_data = read_csv_with_encoding("車種.csv")
 except FileNotFoundError:
     word_data = pd.DataFrame(columns=["あいことば", "車種", "全長", "全幅", "全高"])
 
