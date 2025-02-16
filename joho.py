@@ -10,8 +10,8 @@ def read_csv_with_encoding(file_path):
     encoding = result['encoding']
     return pd.read_csv(file_path, encoding=encoding)
 
-# 日本語フォントの設定（Noto Sans CJK JP）
-font_path = '/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc'  # Noto Sans CJK JPフォントのパス
+# 日本語フォントの設定（DejaVu Sans）
+font_path = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'  # DejaVu Sansフォントのパス
 font_prop = font_manager.FontProperties(fname=font_path)
 plt.rcParams['font.family'] = font_prop.get_name()
 
