@@ -10,12 +10,12 @@ def read_csv_with_encoding(file_path):
     encoding = result['encoding']
     return pd.read_csv(file_path, encoding=encoding)
 
-# Noto Sans JPフォントのインポートと設定
-font_url = "https://fonts.google.com/download?family=Noto%20Sans%20JP"
-font_path = "NotoSansJP-Regular.otf"  # ダウンロードしてローカルに保存
+# アップロードしたNoto Sans JPフォントファイルのパス
+font_path = 'NotoSansJP-Regular.otf'  
 try:
     font_prop = font_manager.FontProperties(fname=font_path)
     plt.rcParams['font.family'] = font_prop.get_name()
+    plt.rcParams['font.sans-serif'] = [font_prop.get_name()]
 except Exception as e:
     st.error(f"フォントファイルの読み込みに失敗しました: {e}")
 
@@ -90,6 +90,7 @@ with tab71:
     ax.grid(True)
     ax.legend()
 
+    
     st.pyplot(fig)
 
     
