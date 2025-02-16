@@ -1,22 +1,14 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import japanize_matplotlib  # 日本語フォント設定用
 import chardet
-from matplotlib import font_manager
 
 def read_csv_with_encoding(file_path):
     with open(file_path, 'rb') as f:
         result = chardet.detect(f.read())
     encoding = result['encoding']
     return pd.read_csv(file_path, encoding=encoding)
-
-# フォントファイルを読み込む
-font_path = 'NotoSansJP-Regular.otf'  # アップロードしたフォントファイルのパス
-try:
-    font_prop = font_manager.FontProperties(fname=font_path)
-    plt.rcParams['font.family'] = font_prop.get_name()
-except Exception as e:
-    st.error(f"フォントファイルの読み込みに失敗しました: {e}")
 
 # CSVファイルから既存のデータを読み込みます
 try:
@@ -89,10 +81,8 @@ with tab71:
     ax.grid(True)
     ax.legend()
 
-    
     st.pyplot(fig)
 
-    
 with tab72:
     genre = st.radio("ジャンル", ["渋滞", "抜け道", "通行止め", "通りにくい", "事故", "災害"])
     x_coord = st.number_input("X座標 (-100 - 100)", min_value=-100, max_value=100, step=1)
@@ -127,6 +117,7 @@ with tab72:
             st.success("内容が登録されました")
         except Exception as e:
             st.error(f"エラーが発生しました: {e}")
+
 
 with tab73:
     tab11, tab12 = st.tabs(["編集", "削除"])
