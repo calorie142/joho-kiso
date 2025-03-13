@@ -165,8 +165,8 @@ with tab5:
         except:
             st.text("エラーが発生しました")
     st.divider()
-    photo_sizeW = st.slider("横の変換後のサイズ",100,1200,600)
-    photo_sizeH = st.slider("縦の変換後のサイズ",100,1200,600)
+    photo_sizeW = st.slider("横の変換後のサイズ",10,1200,600)
+    photo_sizeH = st.slider("縦の変換後のサイズ",10,1200,600)
     if st.button("指定のサイズで変換"):
         try:
             photoa = photob.resize((photo_sizeW,photo_sizeH))
