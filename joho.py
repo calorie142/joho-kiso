@@ -4,7 +4,7 @@ import math
 from PIL import Image
 import pandas as pd
 import datetime
-import pytz #
+#import pytz 
 
 
 st.title("もの技ツール集 Ver.2")
@@ -16,37 +16,37 @@ with tab0:
     st.text("このサイトでは大学生活でたまに使う細かいツールを集めてみました。これ一つで様々なことができます。2年弱、もの技で過ごしてきて使ったツールをまとめてみたのでぜひ活用してください。")
     st.divider()
     api_key = "07e67ab7542092483c720629da6e0542"
-    col4, col5 = st.columns(2)
-    with col4:
-        try:
-            japan_tz = pytz.timezone("Asia/Tokyo")
-            df_now = datetime.datetime.now(japan_tz)
-            st.subheader(f"{df_now.year}年 {df_now.month}月 {df_now.day}日")
-            st.subheader(f"{df_now.hour}時 {df_now.minute}分")
-            st.subheader(f"令和{(df_now.year)-2018}年")
-        except:
-            st.text("エラーが発生しました")
-    with col5:
-        try:
-            cities = ["Nagano","Matsumoto","Ueda","Ina"]
-            city_name = ["長野","松本","上田","伊那"]
-            df_we = pd.DataFrame({"天気":[None,None,None,None],"気温":[None,None,None,None],})
-            df_we.index = city_name
-            def get_weather(city, api_key):
-                url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
-                response = requests.get(url)
-                data = response.json()
-                return data
-            for city in cities:
-                data = get_weather(city, api_key)
-                if data.get("weather"):
-                    df_we.at[city_name[cities.index(city)],"天気"] = data['weather'][0]['description']
-                    df_we.at[city_name[cities.index(city)],"気温"] = data['main']['temp']
-            st.write(df_we)
-        except:
-            st.text("エラーが発生しました")
-    if st.button("更新"):
-        pass
+    #col4, col5 = st.columns(2)
+    #with col4:
+    #    try:
+    #        japan_tz = pytz.timezone("Asia/Tokyo")
+    #        df_now = datetime.datetime.now(japan_tz)
+    #        st.subheader(f"{df_now.year}年 {df_now.month}月 {df_now.day}日")
+    #        st.subheader(f"{df_now.hour}時 {df_now.minute}分")
+    #        st.subheader(f"令和{(df_now.year)-2018}年")
+    #    except:
+    #        st.text("エラーが発生しました")
+    #with col5:
+    #    try:
+    #        cities = ["Nagano","Matsumoto","Ueda","Ina"]
+    #        city_name = ["長野","松本","上田","伊那"]
+    #        df_we = pd.DataFrame({"天気":[None,None,None,None],"気温":[None,None,None,None],})
+    #        df_we.index = city_name
+    #        def get_weather(city, api_key):
+    #            url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+    #            response = requests.get(url)
+    #            data = response.json()
+    #            return data
+    #        for city in cities:
+    #            data = get_weather(city, api_key)
+    #            if data.get("weather"):
+    #                df_we.at[city_name[cities.index(city)],"天気"] = data['weather'][0]['description']
+    #                df_we.at[city_name[cities.index(city)],"気温"] = data['main']['temp']
+    #        st.write(df_we)
+    #    except:
+    #        st.text("エラーが発生しました")
+    #if st.button("更新"):
+    #    pass
 
 with tab1:
     st.header("文字数チェッカー")
